@@ -8,6 +8,7 @@ assert.deepStrictEqual(
   processFilter({
     exclude: {
       size: [[10, 100], [200]],
+      resolution: [[{ width: 0, height: 0 }]],
     },
   }),
   {
@@ -20,7 +21,7 @@ assert.deepStrictEqual(
         [0, 9],
         [101, 199],
       ],
-      resolution: [[{ width: 0, height: 0 }]],
+      resolution: [],
     },
   },
 );

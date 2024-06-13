@@ -72,12 +72,18 @@ export function preprocessResolution(interval) {
   const heightInterval = [];
 
   interval?.forEach(([minResolution, maxResolution]) => {
-    const widthItem = [minResolution.width];
-    const heightItem = [minResolution.height];
-    if (maxResolution != null) {
-      widthItem.push(maxResolution.width);
-      heightItem.push(maxResolution.height);
-    }
+    const widthItem = [minResolution.width, maxResolution?.width];
+    const heightItem = [minResolution.height, maxResolution?.height];
+
+    /**
+     * 如果 maxResolution 不存在可以将 undefined 放入数组
+     * preprocessInterval 会处理数组元素为 undefined 的情况
+     */
+    // if (maxResolution != null) {
+    //   widthItem.push(maxResolution.width);
+    //   heightItem.push(maxResolution.height);
+    // }
+
     widthInterval.push(widthItem);
     heightInterval.push(heightItem);
   });
