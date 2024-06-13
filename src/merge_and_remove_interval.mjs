@@ -15,22 +15,26 @@ assert.deepStrictEqual(
   [[4, 5], [8, 9], [14, 20], [30]],
 );
 
+console.log(mergeAndRemoveInterval(undefined, undefined));
+
 /**
- * @param {number[][]} existedInterval
- * @param {number[][]?} removedInterval
+ * @param {number[][]|undefined} targetInterval
+ * @param {number[][]|undefined} removedInterval
  */
-export function mergeAndRemoveInterval(existedInterval, removedInterval) {
+export function mergeAndRemoveInterval(targetInterval, removedInterval) {
   let interval =
-    !Array.isArray(existedInterval) || existedInterval.length === 0 ? [[0]] : existedInterval;
-  let excluded = Array.isArray(removedInterval) ? removedInterval : [];
+    !Array.isArray(targetInterval) || targetInterval.length === 0
+      ? [[0]]
+      : targetInterval;
+  let removed = Array.isArray(removedInterval) ? removedInterval : [];
 
   interval = preprocessInterval(interval);
-  excluded = preprocessInterval(excluded);
+  removed = preprocessInterval(removed);
 
-  // 取 excluded 的补集
+  // 取 removed 的补集
   const complementary = [];
   let curMin = 0;
-  excluded.forEach(([removeMin, removeMax]) => {
+  removed.forEach(([removeMin, removeMax]) => {
     if (curMin < removeMin) {
       complementary.push([curMin, removeMin - 1]);
       curMin = removeMax + 1;
@@ -61,7 +65,7 @@ export function mergeAndRemoveInterval(existedInterval, removedInterval) {
   }
 
   console.log("区间", interval);
-  console.log("移除区间", excluded);
+  console.log("移除区间", removed);
   console.log("移除区间的补集", complementary);
   console.log("最终结果", result);
 
@@ -80,8 +84,13 @@ export function mergeAndRemoveInterval(existedInterval, removedInterval) {
  * @param {number[][]} interval
  */
 function preprocessInterval(interval) {
+  if (interval.length === 0) {
+    return [];
+  }
+
   const sortByMin = interval.sort((a, b) => a[0] - b[0]);
   const result = [];
+
   let prevInterval = [...sortByMin[0]];
   for (let i = 1; i < sortByMin.length; i++) {
     const [curMin, curMax = Number.POSITIVE_INFINITY] = sortByMin[i];
