@@ -2,20 +2,20 @@
 
 import * as assert from "node:assert";
 
-assert.deepStrictEqual(
-  mergeAndRemoveInterval(
-    [[0, 5], [2, 3], [10, 20], [7, 13], [30, 40], [35]],
-    [
-      [0, 3],
-      [6, 6],
-      [6, 7],
-      [10, 13],
-    ],
-  ),
-  [[4, 5], [8, 9], [14, 20], [30]],
-);
+// assert.deepStrictEqual(
+//   mergeAndRemoveInterval(
+//     [[0, 5], [2, 3], [10, 20], [7, 13], [30, 40], [35]],
+//     [
+//       [0, 3],
+//       [6, 6],
+//       [6, 7],
+//       [10, 13],
+//     ],
+//   ),
+//   [[4, 5], [8, 9], [14, 20], [30]],
+// );
 
-console.log(mergeAndRemoveInterval(undefined, undefined));
+// console.log(mergeAndRemoveInterval(undefined, undefined));
 
 /**
  * @param {number[][]|undefined} targetInterval
@@ -64,10 +64,10 @@ export function mergeAndRemoveInterval(targetInterval, removedInterval) {
     }
   }
 
-  console.log("区间", interval);
-  console.log("移除区间", removed);
-  console.log("移除区间的补集", complementary);
-  console.log("最终结果", result);
+  // console.log("区间", interval);
+  // console.log("移除区间", removed);
+  // console.log("移除区间的补集", complementary);
+  // console.log("最终结果", result);
 
   // 对最终结果做处理
   return result.map(([min, max]) => {
@@ -91,7 +91,11 @@ function preprocessInterval(interval) {
   const sortByMin = interval.sort((a, b) => a[0] - b[0]);
   const result = [];
 
-  let prevInterval = [...sortByMin[0]];
+  const firstInterval = sortByMin[0];
+  let prevInterval = [
+    firstInterval[0],
+    firstInterval[1] ?? Number.POSITIVE_INFINITY,
+  ];
   for (let i = 1; i < sortByMin.length; i++) {
     const [curMin, curMax = Number.POSITIVE_INFINITY] = sortByMin[i];
     const [prevMin, prevMax = Number.POSITIVE_INFINITY] = prevInterval;

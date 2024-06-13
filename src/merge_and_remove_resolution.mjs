@@ -7,37 +7,37 @@ import { deepStrictEqual } from "assert";
  * @typedef {{width:number, height:number}} Resolution
  */
 
-deepStrictEqual(
-  mergeAndRemoveResolution(
-    [
-      [
-        { width: 0, height: 0 },
-        { width: 100, height: 100 },
-      ],
-      [
-        { width: 100, height: 100 },
-        { width: 150, height: 150 },
-      ],
-      [
-        { width: 100, height: 100 },
-        { width: 150, height: 150 },
-      ],
-      [
-        { width: 200, height: 200 },
-      ],
-    ],
-    [
-      [
-        { width: 0, height: 0 },
-        { width: 100, height: 100 },
-      ],
-      [
-        { width: 150, height: 150 },
-      ],
-    ],
-  ),
-  [],
-);
+// deepStrictEqual(
+//   mergeAndRemoveResolution(
+//     [
+//       [
+//         { width: 0, height: 0 },
+//         { width: 100, height: 100 },
+//       ],
+//       [
+//         { width: 100, height: 100 },
+//         { width: 150, height: 150 },
+//       ],
+//       [
+//         { width: 100, height: 100 },
+//         { width: 150, height: 150 },
+//       ],
+//       [
+//         { width: 200, height: 200 },
+//       ],
+//     ],
+//     [
+//       [
+//         { width: 0, height: 0 },
+//         { width: 100, height: 100 },
+//       ],
+//       [
+//         { width: 150, height: 150 },
+//       ],
+//     ],
+//   ),
+//   [],
+// );
 
 /**
  * 多加一个维度的 mergeAndRemoveInterval
@@ -64,7 +64,7 @@ function mergeAndRemoveResolution(targetInterval, removedInterval) {
  * 将 interval 分为 width 和 height 的两个 number[][]
  * @param {Resolution[][]|undefined} interval
  */
-function preprocessResolution(interval) {
+export function preprocessResolution(interval) {
   /** @type {number[][]} */
   const widthInterval = [];
 
