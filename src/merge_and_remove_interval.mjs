@@ -51,8 +51,8 @@ export function mergeAndRemoveInterval(targetInterval, removedInterval) {
   let i1 = 0;
   let i2 = 0;
   while (i1 < interval.length && i2 < complementary.length) {
-    let [start1, end1] = interval[i1];
-    let [start2, end2] = complementary[i2];
+    const [start1, end1] = interval[i1];
+    const [start2, end2] = complementary[i2];
 
     if (end1 >= start2 && end2 >= start1) {
       result.push([Math.max(start1, start2), Math.min(end1, end2)]);
